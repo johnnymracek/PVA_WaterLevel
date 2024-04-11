@@ -20,6 +20,3 @@ Database settings Web.config --> connectionStrings:
 2. SQL Server Agent ---> Jobs ---> Enable
 ---> WaterLevelIndication_StatusRecordafter30sec
 3. Disable when you don't want more records
-
-
-PW : water
