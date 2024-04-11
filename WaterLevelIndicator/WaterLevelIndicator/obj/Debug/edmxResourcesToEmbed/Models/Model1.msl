@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WaterLevelIndicationDBModelStoreContainer" CdmEntityContainer="WaterLevelIndicationDBEntities1">
+    <EntitySetMapping Name="WaterLevelDatas">
+      <EntityTypeMapping TypeName="WaterLevelIndicationDBModel.WaterLevelData">
+        <MappingFragment StoreEntitySet="WaterLevelData">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BoxID" ColumnName="BoxID" />
+          <ScalarProperty Name="Measurement" ColumnName="Measurement" />
+          <ScalarProperty Name="MeasurementDateTime" ColumnName="MeasurementDateTime" />
+          <ScalarProperty Name="TriggerStatus" ColumnName="TriggerStatus" />
+          <ScalarProperty Name="Label" ColumnName="Label" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WaterLevelIndicationUsers">
+      <EntityTypeMapping TypeName="WaterLevelIndicationDBModel.WaterLevelIndicationUser">
+        <MappingFragment StoreEntitySet="WaterLevelIndicationUsers">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WaterLevelIndicationDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="StationNames">
+    <Key>
+      <PropertyRef Name="Station_ID" />
+    </Key>
+    <Property Name="Station_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Station_Name" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="WaterLevelData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BoxID" Type="int" />
+    <Property Name="Measurement" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MeasurementDateTime" Type="datetime" />
+    <Property Name="TriggerStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="Label" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'WaterLevelIndicationDB.dbo.WaterLevelDataReplica' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="WaterLevelDataReplica">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BoxID" Type="int" />
+    <Property Name="Measurement" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MeasurementDateTime" Type="datetime" />
+    <Property Name="TriggerStatus" Type="nvarchar(max)" />
+    <Property Name="Label" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="WaterLevelIndicationUsers">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="WaterLevelIndicationDBModel1StoreContainer">
+    <EntitySet Name="StationNames" EntityType="Self.StationNames" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WaterLevelData" EntityType="Self.WaterLevelData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WaterLevelIndicationUsers" EntityType="Self.WaterLevelIndicationUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WaterLevelDataReplica" EntityType="Self.WaterLevelDataReplica" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [WaterLevelDataReplica].[ID] AS [ID], 
+    [WaterLevelDataReplica].[BoxID] AS [BoxID], 
+    [WaterLevelDataReplica].[Measurement] AS [Measurement], 
+    [WaterLevelDataReplica].[MeasurementDateTime] AS [MeasurementDateTime], 
+    [WaterLevelDataReplica].[TriggerStatus] AS [TriggerStatus], 
+    [WaterLevelDataReplica].[Label] AS [Label]
+    FROM [dbo].[WaterLevelDataReplica] AS [WaterLevelDataReplica]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

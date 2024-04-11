@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WaterLevelIndicationDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="StationNames">
+          <Key>
+            <PropertyRef Name="Station_ID" />
+          </Key>
+          <Property Name="Station_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Station_Name" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="WaterLevelData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BoxID" Type="int" />
+          <Property Name="Measurement" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MeasurementDateTime" Type="datetime" />
+          <Property Name="TriggerStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="Label" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WaterLevelIndicationDB.dbo.WaterLevelDataReplica' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WaterLevelDataReplica">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BoxID" Type="int" />
+          <Property Name="Measurement" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MeasurementDateTime" Type="datetime" />
+          <Property Name="TriggerStatus" Type="nvarchar(max)" />
+          <Property Name="Label" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="WaterLevelIndicationUsers">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="WaterLevelIndicationDBModel1StoreContainer">
+          <EntitySet Name="StationNames" EntityType="Self.StationNames" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WaterLevelData" EntityType="Self.WaterLevelData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WaterLevelIndicationUsers" EntityType="Self.WaterLevelIndicationUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WaterLevelDataReplica" EntityType="Self.WaterLevelDataReplica" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WaterLevelDataReplica].[ID] AS [ID], 
+    [WaterLevelDataReplica].[BoxID] AS [BoxID], 
+    [WaterLevelDataReplica].[Measurement] AS [Measurement], 
+    [WaterLevelDataReplica].[MeasurementDateTime] AS [MeasurementDateTime], 
+    [WaterLevelDataReplica].[TriggerStatus] AS [TriggerStatus], 
+    [WaterLevelDataReplica].[Label] AS [Label]
+    FROM [dbo].[WaterLevelDataReplica] AS [WaterLevelDataReplica]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WaterLevelIndicationDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="StationNames">
+          <Key>
+            <PropertyRef Name="Station_ID" />
+          </Key>
+          <Property Name="Station_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Station_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="WaterLevelData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoxID" Type="Int32" />
+          <Property Name="Measurement" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MeasurementDateTime" Type="DateTime" Precision="3" />
+          <Property Name="TriggerStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Label" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WaterLevelIndicationUsers">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WaterLevelDataReplica">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoxID" Type="Int32" />
+          <Property Name="Measurement" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MeasurementDateTime" Type="DateTime" Precision="3" />
+          <Property Name="TriggerStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Label" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="WaterLevelIndicationDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="StationNames" EntityType="Self.StationNames" />
+          <EntitySet Name="WaterLevelData" EntityType="Self.WaterLevelData" />
+          <EntitySet Name="WaterLevelIndicationUsers" EntityType="Self.WaterLevelIndicationUsers" />
+          <EntitySet Name="WaterLevelDataReplica" EntityType="Self.WaterLevelDataReplica" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WaterLevelIndicationDBModel1StoreContainer" CdmEntityContainer="WaterLevelIndicationDBEntities">
+          <EntitySetMapping Name="StationNames">
+            <EntityTypeMapping TypeName="WaterLevelIndicationDBModel1.StationNames">
+              <MappingFragment StoreEntitySet="StationNames">
+                <ScalarProperty Name="Station_ID" ColumnName="Station_ID" />
+                <ScalarProperty Name="Station_Name" ColumnName="Station_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WaterLevelData">
+            <EntityTypeMapping TypeName="WaterLevelIndicationDBModel1.WaterLevelData">
+              <MappingFragment StoreEntitySet="WaterLevelData">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BoxID" ColumnName="BoxID" />
+                <ScalarProperty Name="Measurement" ColumnName="Measurement" />
+                <ScalarProperty Name="MeasurementDateTime" ColumnName="MeasurementDateTime" />
+                <ScalarProperty Name="TriggerStatus" ColumnName="TriggerStatus" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WaterLevelIndicationUsers">
+            <EntityTypeMapping TypeName="WaterLevelIndicationDBModel1.WaterLevelIndicationUsers">
+              <MappingFragment StoreEntitySet="WaterLevelIndicationUsers">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WaterLevelDataReplica">
+            <EntityTypeMapping TypeName="WaterLevelIndicationDBModel1.WaterLevelDataReplica">
+              <MappingFragment StoreEntitySet="WaterLevelDataReplica">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BoxID" ColumnName="BoxID" />
+                <ScalarProperty Name="Measurement" ColumnName="Measurement" />
+                <ScalarProperty Name="MeasurementDateTime" ColumnName="MeasurementDateTime" />
+                <ScalarProperty Name="TriggerStatus" ColumnName="TriggerStatus" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
